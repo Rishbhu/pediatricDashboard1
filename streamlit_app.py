@@ -26,9 +26,15 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .pinkpanel{background:var(--panel);border:2px solid #e8c7cf;border-radius:10px;overflow:hidden;}
 .headerpink{background:#f7c8d8;border-bottom:2px solid #eab2c6;padding:10px 14px;font-weight:900;text-align:center;}
 .pill-blue{display:inline-block;padding:6px 14px;border-radius:999px;background:#d6e7ff;border:1px solid #bcd6ff;font-weight:900;}
-.iconbox{width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid #E7B6C0;background:#FFD7E2;font-size:36px;}
-.iconbox2{width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid #F0C994;background:#FFE8C6;font-size:36px;}
-.iconbox3{width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid #B6D7FF;background:#D0E9FF;font-size:36px;}
+.iconrow{display:flex;gap:14px;justify-content:center;padding:12px 0 6px;}
+.iconbox, .iconbox2, .iconbox3{
+  width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:36px;
+}
+.iconbox{border:2px solid #E7B6C0;background:#FFD7E2;}
+.iconbox2{border:2px solid #F0C994;background:#FFE8C6;}
+.iconbox3{border:2px solid #B6D7FF;background:#D0E9FF;}
+.sel{ outline:3px solid #3B82F6; box-shadow:0 0 0 2px #93C5FD inset; }
+
 .right{text-align:right;} .center{text-align:center;} .red{color:#C6002A;font-weight:900;}
 
 /* Timeline */
@@ -46,31 +52,37 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .eventtitle{font-weight:900;margin:10px 0 6px;}
 .addbtn{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 #f6d8da inset;}
 
-/* ===== High-contrast dropdowns (selectbox & multiselect) ===== */
+/* ===== UPDATED blue-themed dropdown styles ===== */
 .stSelectbox div[data-baseweb="select"] > div,
 .stMultiSelect div[data-baseweb="select"] > div{
-  background:#ffffff !important; color:#111 !important; border-color:#cfd6e0 !important;
-  min-height:44px; font-weight:700;
+  background:#F1F7FF !important; color:#0B3C91 !important; border-color:#9EC5FE !important;
+  min-height:44px; font-weight:800;
 }
-.stSelectbox svg, .stMultiSelect svg{ fill:#111 !important; color:#111 !important; }
-div[data-baseweb="select"] input{ color:#111 !important; font-weight:700; }
-div[data-baseweb="select"] input::placeholder{ color:#6b7280 !important; }
-.stMultiSelect [data-baseweb="tag"]{ background:#eaf2ff !important; color:#0b3c91 !important; border-radius:12px !important; font-weight:800 !important; }
+.stSelectbox svg, .stMultiSelect svg{ fill:#0B3C91 !important; color:#0B3C91 !important; }
+div[data-baseweb="select"] input{ color:#0B3C91 !important; font-weight:800; }
+div[data-baseweb="select"] input::placeholder{ color:#5B7DB3 !important; }
+
+/* Menu (popover) */
 div[data-baseweb="popover"]{ z-index: 9999 !important; }
 div[data-baseweb="menu"]{
-  background:#ffffff !important; color:#111 !important; border:1px solid #cfd6e0 !important;
+  background:#F7FBFF !important; color:#0B3C91 !important; border:1px solid #9EC5FE !important;
   border-radius:12px !important; box-shadow:0 12px 30px rgba(0,0,0,0.18) !important;
 }
-div[data-baseweb="menu"] ul{ background:#ffffff !important; padding:6px !important; }
+div[data-baseweb="menu"] ul{ background:#F7FBFF !important; padding:6px !important; }
 div[data-baseweb="menu"] li, div[data-baseweb="menu"] [role="option"]{
-  background:#ffffff !important; color:#111 !important; font-weight:800 !important;
+  background:#F7FBFF !important; color:#0B3C91 !important; font-weight:900 !important;
   font-size:15px !important; padding:10px 12px !important; border-radius:8px !important;
 }
 div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] [role="option"]:hover{
-  background:var(--hover) !important; color:#111 !important;
+  background:#E8F2FF !important; color:#0B3C91 !important;
 }
 div[data-baseweb="menu"] li[aria-selected="true"], div[data-baseweb="menu"] [role="option"][aria-selected="true"]{
-  background:var(--selected) !important; color:#111 !important; box-shadow: inset 3px 0 0 #E15259;
+  background:#DBEAFE !important; color:#0B3C91 !important; box-shadow: inset 4px 0 0 #3B82F6;
+}
+
+/* Multiselect tags */
+.stMultiSelect [data-baseweb="tag"]{
+  background:#DBEAFE !important; color:#0B3C91 !important; border-radius:12px !important; font-weight:900 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -97,53 +109,37 @@ def gauge_svg(score_0_to_10: float) -> str:
 # ----------------- COLUMNS -----------------
 col_left, col_mid, col_right = st.columns([1.1, 1.2, 1.2])
 
-# ================= LEFT COLUMN (only widgets; no mirrored pills) =================
+# ================= LEFT COLUMN =================
 with col_left:
     st.markdown('<div class="pinkpanel">', unsafe_allow_html=True)
     st.markdown('<div style="padding:6px 10px;"><span style="display:inline-block;padding:6px 12px;border-radius:999px;background:#EEF0F3;border:1px solid #D7DBE0;font-weight:800;font-size:12px;">Premature</span></div>', unsafe_allow_html=True)
     st.markdown('<div class="headerpink">Patient Info</div>', unsafe_allow_html=True)
 
-    # icons row (visual)
-    st.markdown("""
-    <div style="display:flex;gap:14px;justify-content:center;padding:12px 0 6px;">
-      <div class="iconbox">♀️</div>
+    # --- Sex selector (Girl/Boy) + highlight icon ---
+    sex = st.selectbox("Sex", ["Girl","Boy"], index=0, key="sex")
+    sel_girl = " sel" if sex == "Girl" else ""
+    sel_boy  = " sel" if sex == "Boy" else ""
+
+    st.markdown(f"""
+    <div class="iconrow">
+      <div class="iconbox{sel_girl}">♀️</div>
       <div class="iconbox2">👶</div>
-      <div class="iconbox3">♂️</div>
+      <div class="iconbox3{sel_boy}">♂️</div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Inner white card with ONLY the inputs (no duplicate labels rendered)
+    # Inner white card with ONLY the inputs
     with st.container():
         st.markdown('<div class="card">', unsafe_allow_html=True)
 
         st.selectbox("Race", ["White","Black","Asian","Native American","Pacific Islander","Other"], index=0, key="race")
-        st.selectbox("Ethnicity", ["German","Hispanic/Latino","Non-Hispanic","Other"], index=0, key="eth")
+        st.selectbox("Ethnicity", ["German","Hispanic/Latino","Non-Hispanic","Other"], index=1, key="eth")
         st.date_input("Date of Birth", value=dt.date(2025,4,21), key="dob")
         st.number_input("Age at Surgery (days)", min_value=0, value=7, step=1, key="age_days")
 
-        # weight + mini tiles (visual only)
-        st.markdown("""
-        <div style="display:flex;gap:10px;margin-top:8px;">
-          <div class="card" style="width:120px;height:96px;border-radius:14px;display:flex;align-items:center;justify-content:center;">
-            <div class="center">
-              <div style="font-weight:800;">🧪</div>
-              <div style="font-size:12px;color:#555;">Mass/Mode</div>
-            </div>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
-            <div class="card" style="border-radius:14px;padding:10px;">
-              <div style="font-size:12px;"><b>Pt @ Birth – 6.4 lbs</b><br><b>Pt @ Surgery – 9.4 lbs</b></div>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <div class="card" style="flex:1;padding:8px;border-radius:12px;text-align:center;font-size:12px;">Mean, Mode Wt<br>Birth</div>
-              <div class="card" style="flex:1;padding:8px;border-radius:12px;text-align:center;font-size:12px;">Mean, Mode Wt<br>Surgery</div>
-              <div class="pill-blue" style="flex:1;text-align:center;display:flex;align-items:center;justify-content:center;">UP Shunt</div>
-            </div>
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
+        # --- REMOVED mass/mode mini-tiles section (per your request) ---
 
-        # shunt size scale (visual)
+        # Shunt size scale (visual)
         st.markdown("""
         <div style="margin-top:10px;">
           <div><b>Shunt Size</b></div>
@@ -217,7 +213,17 @@ with col_right:
 
     st.markdown('<div class="center" style="margin:8px 0;"><span class="addbtn">Additional Info</span></div>', unsafe_allow_html=True)
     syn = st.toggle("Syndrome Present", value=True)
-    fd = st.text_input("Fetal Drug Exposure", value="—")
+
+    # CHANGED: Fetal Drug Exposure -> Yes/No dropdown
+    fd = st.selectbox("Fetal Drug Exposure", ["No","Yes"], index=0)
+
     ab = st.text_area("Abnormalities / Etc.", value="—", height=80)
-    st.markdown(f'<div class="card"><div style="text-decoration:underline;font-weight:900;">Syndrome Present: {syn}</div>'
-                f'Fetal Drug Exposure: {fd}<br>Abnormalities: {ab}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="card">'
+        f'<div style="text-decoration:underline;font-weight:900;">Syndrome Present: {syn}</div>'
+        f'Sex: {st.session_state.get("sex","—")}<br>'
+        f'Fetal Drug Exposure: {fd}<br>'
+        f'Abnormalities: {ab}'
+        f'</div>',
+        unsafe_allow_html=True
+    )
