@@ -52,37 +52,122 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .eventtitle{font-weight:900;margin:10px 0 6px;}
 .addbtn{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 #f6d8da inset;}
 
-/* ===== UPDATED dropdown styles with high contrast ===== */
+/* ===== DROPDOWN STYLES - HIGH CONTRAST WHITE BACKGROUND ===== */
 .stSelectbox div[data-baseweb="select"] > div,
 .stMultiSelect div[data-baseweb="select"] > div{
-  background:#FFFFFF !important; color:#1B1E28 !important; border-color:#C4C4C4 !important;
-  min-height:44px; font-weight:800; border-width:2px !important;
+  background:#FFFFFF !important; 
+  background-color:#FFFFFF !important; 
+  color:#1B1E28 !important; 
+  border-color:#C4C4C4 !important;
+  min-height:44px; 
+  font-weight:800; 
+  border-width:2px !important;
 }
-.stSelectbox svg, .stMultiSelect svg{ fill:#1B1E28 !important; color:#1B1E28 !important; }
-div[data-baseweb="select"] input{ color:#1B1E28 !important; font-weight:800; }
-div[data-baseweb="select"] input::placeholder{ color:#8A8A8A !important; }
+.stSelectbox svg, .stMultiSelect svg{ 
+  fill:#1B1E28 !important; 
+  color:#1B1E28 !important; 
+}
+div[data-baseweb="select"] input{ 
+  color:#1B1E28 !important; 
+  font-weight:800; 
+  background:#FFFFFF !important;
+  background-color:#FFFFFF !important;
+}
+div[data-baseweb="select"] input::placeholder{ 
+  color:#8A8A8A !important; 
+}
 
-/* Menu (popover) */
-div[data-baseweb="popover"]{ z-index: 9999 !important; }
+/* Dropdown menu popover - FORCE WHITE BACKGROUND */
+div[data-baseweb="popover"]{ 
+  z-index: 9999 !important; 
+  background:#FFFFFF !important;
+  background-color:#FFFFFF !important;
+}
+div[data-baseweb="popover"] > div{
+  background:#FFFFFF !important;
+  background-color:#FFFFFF !important;
+}
 div[data-baseweb="menu"]{
-  background:#FFFFFF !important; color:#1B1E28 !important; border:2px solid #C4C4C4 !important;
-  border-radius:12px !important; box-shadow:0 12px 30px rgba(0,0,0,0.25) !important;
+  background:#FFFFFF !important; 
+  background-color:#FFFFFF !important;
+  color:#1B1E28 !important; 
+  border:2px solid #C4C4C4 !important;
+  border-radius:12px !important; 
+  box-shadow:0 12px 30px rgba(0,0,0,0.25) !important;
 }
-div[data-baseweb="menu"] ul{ background:#FFFFFF !important; padding:6px !important; }
-div[data-baseweb="menu"] li, div[data-baseweb="menu"] [role="option"]{
-  background:#FFFFFF !important; color:#1B1E28 !important; font-weight:900 !important;
-  font-size:15px !important; padding:10px 12px !important; border-radius:8px !important;
+div[data-baseweb="menu"] ul{ 
+  background:#FFFFFF !important; 
+  background-color:#FFFFFF !important;
+  padding:6px !important; 
 }
-div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] [role="option"]:hover{
-  background:#E8E8E8 !important; color:#1B1E28 !important;
+div[data-baseweb="menu"] li, 
+div[data-baseweb="menu"] [role="option"],
+div[data-baseweb="menu"] > ul > li,
+div[data-baseweb="menu"] ul li{
+  background:#FFFFFF !important; 
+  background-color:#FFFFFF !important;
+  color:#1B1E28 !important; 
+  font-weight:900 !important;
+  font-size:15px !important; 
+  padding:10px 12px !important; 
+  border-radius:8px !important;
 }
-div[data-baseweb="menu"] li[aria-selected="true"], div[data-baseweb="menu"] [role="option"][aria-selected="true"]{
-  background:#3B82F6 !important; color:#FFFFFF !important; box-shadow: inset 4px 0 0 #1E40AF;
+div[data-baseweb="menu"] li:hover, 
+div[data-baseweb="menu"] [role="option"]:hover,
+div[data-baseweb="menu"] > ul > li:hover,
+div[data-baseweb="menu"] ul li:hover{
+  background:#E8E8E8 !important; 
+  background-color:#E8E8E8 !important;
+  color:#1B1E28 !important;
+}
+div[data-baseweb="menu"] li[aria-selected="true"], 
+div[data-baseweb="menu"] [role="option"][aria-selected="true"],
+div[data-baseweb="menu"] > ul > li[aria-selected="true"],
+div[data-baseweb="menu"] ul li[aria-selected="true"]{
+  background:#3B82F6 !important; 
+  background-color:#3B82F6 !important;
+  color:#FFFFFF !important; 
+  box-shadow: inset 4px 0 0 #1E40AF;
+}
+
+/* Force text color in dropdown options - override ALL nested elements */
+div[data-baseweb="menu"] li *,
+div[data-baseweb="menu"] [role="option"] *,
+div[data-baseweb="menu"] span,
+div[data-baseweb="menu"] div,
+div[data-baseweb="menu"] p,
+div[data-baseweb="menu"] li span,
+div[data-baseweb="menu"] li div{
+  color:#1B1E28 !important;
+}
+
+/* Override any dark theme styles on popover children - but preserve hover/selected */
+div[data-baseweb="popover"] > div{
+  background-color:#FFFFFF !important;
+}
+div[data-baseweb="popover"] ul{
+  background-color:#FFFFFF !important;
+}
+div[data-baseweb="popover"] li:not(:hover):not([aria-selected="true"]){
+  background-color:#FFFFFF !important;
+  color:#1B1E28 !important;
+}
+
+/* Target BaseWeb select dropdown specifically */
+[data-baseweb="select"] [role="listbox"],
+[data-baseweb="select"] [role="option"]{
+  background:#FFFFFF !important;
+  background-color:#FFFFFF !important;
+  color:#1B1E28 !important;
 }
 
 /* Multiselect tags */
 .stMultiSelect [data-baseweb="tag"]{
-  background:#3B82F6 !important; color:#FFFFFF !important; border-radius:12px !important; font-weight:900 !important;
+  background:#3B82F6 !important; 
+  background-color:#3B82F6 !important;
+  color:#FFFFFF !important; 
+  border-radius:12px !important; 
+  font-weight:900 !important;
 }
 </style>
 """, unsafe_allow_html=True)
