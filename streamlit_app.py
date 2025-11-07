@@ -52,82 +52,97 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .eventtitle{font-weight:900;margin:10px 0 6px;}
 .addbtn{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 #f6d8da inset;}
 
-/* ===== DROPDOWN STYLES - HIGH CONTRAST WHITE BACKGROUND ===== */
+/* ===== DROPDOWN STYLES - DARK THEME WITH RED BORDERS ===== */
 .stSelectbox div[data-baseweb="select"] > div,
 .stMultiSelect div[data-baseweb="select"] > div{
-  background:#FFFFFF !important; 
-  background-color:#FFFFFF !important; 
-  color:#1B1E28 !important; 
-  border-color:#C4C4C4 !important;
+  background:#1A1A1A !important; 
+  background-color:#1A1A1A !important; 
+  color:#FFFFFF !important; 
+  border-color:#333333 !important;
   min-height:44px; 
   font-weight:800; 
   border-width:2px !important;
+  border-style:solid !important;
+}
+.stSelectbox div[data-baseweb="select"] > div:focus,
+.stSelectbox div[data-baseweb="select"] > div:focus-within,
+.stMultiSelect div[data-baseweb="select"] > div:focus,
+.stMultiSelect div[data-baseweb="select"] > div:focus-within,
+.stSelectbox div[data-baseweb="select"][aria-expanded="true"] > div,
+.stMultiSelect div[data-baseweb="select"][aria-expanded="true"] > div{
+  border-color:#FF0000 !important;
+}
+/* When popover is open, highlight the parent select */
+div[data-baseweb="popover"]:not([style*="display: none"]) ~ * .stSelectbox div[data-baseweb="select"] > div,
+div[data-baseweb="popover"]:not([style*="display: none"]) ~ * .stMultiSelect div[data-baseweb="select"] > div{
+  border-color:#FF0000 !important;
 }
 .stSelectbox svg, .stMultiSelect svg{ 
-  fill:#1B1E28 !important; 
-  color:#1B1E28 !important; 
+  fill:#FFFFFF !important; 
+  color:#FFFFFF !important; 
 }
 div[data-baseweb="select"] input{ 
-  color:#1B1E28 !important; 
+  color:#FFFFFF !important; 
   font-weight:800; 
-  background:#FFFFFF !important;
-  background-color:#FFFFFF !important;
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
 }
 div[data-baseweb="select"] input::placeholder{ 
-  color:#8A8A8A !important; 
+  color:#B0B0B0 !important; 
 }
 
-/* Dropdown menu popover - FORCE WHITE BACKGROUND */
+/* Dropdown menu popover - DARK BACKGROUND */
 div[data-baseweb="popover"]{ 
   z-index: 9999 !important; 
-  background:#FFFFFF !important;
-  background-color:#FFFFFF !important;
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
 }
 div[data-baseweb="popover"] > div{
-  background:#FFFFFF !important;
-  background-color:#FFFFFF !important;
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
 }
 div[data-baseweb="menu"]{
-  background:#FFFFFF !important; 
-  background-color:#FFFFFF !important;
-  color:#1B1E28 !important; 
-  border:2px solid #C4C4C4 !important;
-  border-radius:12px !important; 
-  box-shadow:0 12px 30px rgba(0,0,0,0.25) !important;
+  background:#1A1A1A !important; 
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important; 
+  border:1px solid #333333 !important;
+  border-radius:8px !important; 
+  box-shadow:0 12px 30px rgba(0,0,0,0.5) !important;
 }
 div[data-baseweb="menu"] ul{ 
-  background:#FFFFFF !important; 
-  background-color:#FFFFFF !important;
+  background:#1A1A1A !important; 
+  background-color:#1A1A1A !important;
   padding:6px !important; 
 }
 div[data-baseweb="menu"] li, 
 div[data-baseweb="menu"] [role="option"],
 div[data-baseweb="menu"] > ul > li,
 div[data-baseweb="menu"] ul li{
-  background:#FFFFFF !important; 
-  background-color:#FFFFFF !important;
-  color:#1B1E28 !important; 
+  background:#1A1A1A !important; 
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important; 
   font-weight:900 !important;
   font-size:15px !important; 
   padding:10px 12px !important; 
-  border-radius:8px !important;
+  border-radius:6px !important;
+  border:1px solid transparent !important;
 }
 div[data-baseweb="menu"] li:hover, 
 div[data-baseweb="menu"] [role="option"]:hover,
 div[data-baseweb="menu"] > ul > li:hover,
 div[data-baseweb="menu"] ul li:hover{
-  background:#E8E8E8 !important; 
-  background-color:#E8E8E8 !important;
-  color:#1B1E28 !important;
+  background:#2A2A2A !important; 
+  background-color:#2A2A2A !important;
+  color:#FFFFFF !important;
 }
 div[data-baseweb="menu"] li[aria-selected="true"], 
 div[data-baseweb="menu"] [role="option"][aria-selected="true"],
 div[data-baseweb="menu"] > ul > li[aria-selected="true"],
 div[data-baseweb="menu"] ul li[aria-selected="true"]{
-  background:#3B82F6 !important; 
-  background-color:#3B82F6 !important;
+  background:#333333 !important; 
+  background-color:#333333 !important;
   color:#FFFFFF !important; 
-  box-shadow: inset 4px 0 0 #1E40AF;
+  border:2px solid #FF0000 !important;
 }
 
 /* Force text color in dropdown options - override ALL nested elements */
@@ -138,36 +153,230 @@ div[data-baseweb="menu"] div,
 div[data-baseweb="menu"] p,
 div[data-baseweb="menu"] li span,
 div[data-baseweb="menu"] li div{
-  color:#1B1E28 !important;
+  color:#FFFFFF !important;
 }
 
-/* Override any dark theme styles on popover children - but preserve hover/selected */
+/* Override any light theme styles on popover children */
 div[data-baseweb="popover"] > div{
-  background-color:#FFFFFF !important;
+  background-color:#1A1A1A !important;
 }
 div[data-baseweb="popover"] ul{
-  background-color:#FFFFFF !important;
+  background-color:#1A1A1A !important;
 }
 div[data-baseweb="popover"] li:not(:hover):not([aria-selected="true"]){
-  background-color:#FFFFFF !important;
-  color:#1B1E28 !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
 }
 
 /* Target BaseWeb select dropdown specifically */
 [data-baseweb="select"] [role="listbox"],
 [data-baseweb="select"] [role="option"]{
-  background:#FFFFFF !important;
-  background-color:#FFFFFF !important;
-  color:#1B1E28 !important;
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
 }
 
 /* Multiselect tags */
 .stMultiSelect [data-baseweb="tag"]{
-  background:#3B82F6 !important; 
-  background-color:#3B82F6 !important;
+  background:#333333 !important; 
+  background-color:#333333 !important;
   color:#FFFFFF !important; 
+  border:1px solid #FF0000 !important;
   border-radius:12px !important; 
   font-weight:900 !important;
+}
+
+/* ===== DATE INPUT - DARK THEME WITH RED BORDERS ===== */
+.stDateInput > div > div,
+.stDateInput div[data-baseweb="input"]{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border-color:#333333 !important;
+  border-width:2px !important;
+  border-style:solid !important;
+  min-height:44px !important;
+  font-weight:800 !important;
+}
+.stDateInput > div > div:focus,
+.stDateInput > div > div:focus-within,
+.stDateInput div[data-baseweb="input"]:focus,
+.stDateInput div[data-baseweb="input"]:focus-within{
+  border-color:#FF0000 !important;
+}
+.stDateInput input{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  font-weight:800 !important;
+}
+.stDateInput svg{
+  fill:#FFFFFF !important;
+  color:#FFFFFF !important;
+}
+
+/* Date picker calendar popup - DARK THEME */
+div[data-baseweb="popover"][id*="date"],
+div[data-baseweb="popover"] [role="dialog"]{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  border:1px solid #333333 !important;
+  border-radius:8px !important;
+  box-shadow:0 12px 30px rgba(0,0,0,0.5) !important;
+}
+div[data-baseweb="popover"][id*="date"] *,
+div[data-baseweb="popover"] [role="dialog"] *{
+  color:#FFFFFF !important;
+}
+div[data-baseweb="popover"][id*="date"] [role="gridcell"],
+div[data-baseweb="popover"] [role="dialog"] [role="gridcell"]{
+  background:#1A1A1A !important;
+  color:#FFFFFF !important;
+}
+div[data-baseweb="popover"][id*="date"] [role="gridcell"]:hover,
+div[data-baseweb="popover"] [role="dialog"] [role="gridcell"]:hover{
+  background:#2A2A2A !important;
+  color:#FFFFFF !important;
+}
+div[data-baseweb="popover"][id*="date"] [role="gridcell"][aria-selected="true"],
+div[data-baseweb="popover"] [role="dialog"] [role="gridcell"][aria-selected="true"]{
+  background:#333333 !important;
+  color:#FFFFFF !important;
+  border:2px solid #FF0000 !important;
+}
+
+/* ===== NUMBER INPUT - DARK THEME WITH RED BORDERS ===== */
+.stNumberInput > div > div,
+.stNumberInput div[data-baseweb="input"]{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border-color:#333333 !important;
+  border-width:2px !important;
+  border-style:solid !important;
+  min-height:44px !important;
+  font-weight:800 !important;
+}
+.stNumberInput > div > div:focus,
+.stNumberInput > div > div:focus-within,
+.stNumberInput div[data-baseweb="input"]:focus,
+.stNumberInput div[data-baseweb="input"]:focus-within{
+  border-color:#FF0000 !important;
+}
+.stNumberInput input{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  font-weight:800 !important;
+}
+.stNumberInput button{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border-color:#333333 !important;
+}
+.stNumberInput button:hover{
+  background:#2A2A2A !important;
+  background-color:#2A2A2A !important;
+}
+.stNumberInput svg{
+  fill:#FFFFFF !important;
+  color:#FFFFFF !important;
+}
+
+/* ===== TEXT AREA - DARK THEME WITH RED BORDERS ===== */
+.stTextArea > div > div > textarea,
+.stTextArea textarea{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border:2px solid #333333 !important;
+  border-radius:8px !important;
+  font-weight:800 !important;
+  padding:10px 12px !important;
+}
+.stTextArea textarea:focus{
+  border-color:#FF0000 !important;
+  outline:none !important;
+}
+.stTextArea textarea::placeholder{
+  color:#B0B0B0 !important;
+}
+
+/* ===== TOGGLE - DARK THEME ===== */
+.stToggle label{
+  color:#FFFFFF !important;
+  font-weight:900 !important;
+}
+.stToggle [data-baseweb="switch"]{
+  background:#333333 !important;
+}
+.stToggle [data-baseweb="switch"][aria-checked="true"]{
+  background:#FF0000 !important;
+}
+
+/* ===== ALL INPUT FIELDS - DARK THEME UNIFIED BASE STYLES ===== */
+.stTextInput > div > div > input,
+.stTextInput input{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border:2px solid #333333 !important;
+  border-radius:8px !important;
+  min-height:44px !important;
+  font-weight:800 !important;
+  padding:10px 12px !important;
+}
+.stTextInput input:focus{
+  border-color:#FF0000 !important;
+  outline:none !important;
+}
+.stTextInput input::placeholder{
+  color:#B0B0B0 !important;
+}
+
+/* Ensure all form elements have consistent label styling - DARK THEME */
+.stSelectbox label,
+.stMultiSelect label,
+.stDateInput label,
+.stNumberInput label,
+.stTextArea label,
+.stTextInput label,
+.stToggle label{
+  color:#FFFFFF !important;
+  font-weight:900 !important;
+  font-size:14px !important;
+}
+
+/* ===== BORDERED CONTAINERS - DARK THEME ===== */
+div[data-testid="stHorizontalBlock"] > div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-baseweb="block"],
+div[data-testid="stHorizontalBlock"] > div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-baseweb="block"][data-testid="stVerticalBlockBorderWrapper"]{
+  border:2px solid #333333 !important;
+  border-radius:12px !important;
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  padding:12px 14px !important;
+}
+
+/* ===== BUTTONS - DARK THEME (if any are used) ===== */
+.stButton > button{
+  background:#1A1A1A !important;
+  background-color:#1A1A1A !important;
+  color:#FFFFFF !important;
+  border:2px solid #FF0000 !important;
+  border-radius:8px !important;
+  font-weight:800 !important;
+  padding:10px 20px !important;
+  min-height:44px !important;
+}
+.stButton > button:hover{
+  background:#2A2A2A !important;
+  background-color:#2A2A2A !important;
+  border-color:#FF3333 !important;
+}
+.stButton > button:focus{
+  outline:2px solid #FF0000 !important;
+  outline-offset:2px !important;
 }
 </style>
 """, unsafe_allow_html=True)
