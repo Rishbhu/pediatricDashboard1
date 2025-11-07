@@ -13,15 +13,15 @@ header[data-testid="stHeader"]{display:none !important;}
 #MainMenu, footer{visibility:hidden !important;}
 .block-container{padding-top:6px !important; max-width:1320px;}
 
-/* Theme (high contrast, light) */
+/* Theme (high contrast) */
 :root{
   --bg:#F6EFEF; --panel:#FBECEC; --border:#E1C1C3; --ink:#1b1e28;
-  --pill:#EAF3FF; --pillborder:#C7DBFF;
+  --pill:#EAF3FF; --pillborder:#C7DBFF; --hover:#EEF4FF; --selected:#FFE7EC;
 }
 [data-testid="stAppViewContainer"]{background:var(--bg);}
 h1,h2,h3,h4,p,div,span{color:var(--ink);}
 
-/* Cards & layout */
+/* Cards & layout bits */
 .card{background:#fff;border:2px solid var(--border);border-radius:16px;padding:12px 14px;box-shadow:0 2px 0 #f6d8da inset;margin-bottom:12px;}
 .pinkpanel{background:var(--panel);border:2px solid #e8c7cf;border-radius:10px;overflow:hidden;}
 .headerpink{background:#f7c8d8;border-bottom:2px solid #eab2c6;padding:10px 14px;font-weight:900;text-align:center;}
@@ -30,9 +30,9 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .iconbox, .iconbox2, .iconbox3{
   width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:36px;
 }
-.iconbox{border:2px solid #E7B6C0;background:#FFD7E2;}   /* Girl */
-.iconbox2{border:2px solid #F0C994;background:#FFE8C6;}  /* Baby */
-.iconbox3{border:2px solid #B6D7FF;background:#D0E9FF;}  /* Boy */
+.iconbox{border:2px solid #E7B6C0;background:#FFD7E2;}
+.iconbox2{border:2px solid #F0C994;background:#FFE8C6;}
+.iconbox3{border:2px solid #B6D7FF;background:#D0E9FF;}
 .sel{ outline:3px solid #3B82F6; box-shadow:0 0 0 2px #93C5FD inset; }
 
 .right{text-align:right;} .center{text-align:center;} .red{color:#C6002A;font-weight:900;}
@@ -47,63 +47,42 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
 .tick .dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;background:#111;border-radius:50%;}
 .tick .lbl{position:absolute;left:20px;top:-10px;width:230px;font-weight:700;}
 
-/* Event boxes */
+/* Event-look boxes */
 .eventbox{border:2px solid var(--border);border-radius:16px;padding:12px;background:#fff;box-shadow:0 2px 0 #f6d8da inset;}
 .eventtitle{font-weight:900;margin:10px 0 6px;}
 .addbtn{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 #f6d8da inset;}
 
-/* -------- FORCE LIGHT, HIGH-CONTRAST SELECT/MULTISELECT -------- */
-html, body { color-scheme: light !important; }
-
-/* Closed control */
+/* ===== UPDATED blue-themed dropdown styles ===== */
 .stSelectbox div[data-baseweb="select"] > div,
 .stMultiSelect div[data-baseweb="select"] > div{
-  background:#FFFFFF !important;
-  color:#0B0F19 !important;
-  border:1px solid #9EC5FE !important;
-  min-height:44px;
-  font-weight:800;
+  background:#F1F7FF !important; color:#0B3C91 !important; border-color:#9EC5FE !important;
+  min-height:44px; font-weight:800;
 }
-.stSelectbox svg, .stMultiSelect svg{ fill:#0B0F19 !important; color:#0B0F19 !important; }
-div[data-baseweb="select"] input{ color:#0B0F19 !important; font-weight:800; }
+.stSelectbox svg, .stMultiSelect svg{ fill:#0B3C91 !important; color:#0B3C91 !important; }
+div[data-baseweb="select"] input{ color:#0B3C91 !important; font-weight:800; }
 div[data-baseweb="select"] input::placeholder{ color:#5B7DB3 !important; }
 
-/* Popover & menu */
-div[data-baseweb="popover"], div[data-baseweb="menu"], div[data-baseweb="menu"] *{
-  color-scheme: light !important;
-}
+/* Menu (popover) */
+div[data-baseweb="popover"]{ z-index: 9999 !important; }
 div[data-baseweb="menu"]{
-  background:#FFFFFF !important;
-  color:#0B0F19 !important;
-  border:1px solid #9EC5FE !important;
-  border-radius:12px !important;
-  box-shadow:0 16px 34px rgba(0,0,0,0.22) !important;
+  background:#F7FBFF !important; color:#0B3C91 !important; border:1px solid #9EC5FE !important;
+  border-radius:12px !important; box-shadow:0 12px 30px rgba(0,0,0,0.18) !important;
 }
-div[data-baseweb="menu"] ul{ background:#FFFFFF !important; padding:6px !important; }
-div[data-baseweb="menu"] [role="option"]{
-  background:#FFFFFF !important;
-  color:#0B0F19 !important;
-  font-weight:900 !important;
-  font-size:15px !important;
-  padding:10px 12px !important;
-  border-radius:8px !important;
+div[data-baseweb="menu"] ul{ background:#F7FBFF !important; padding:6px !important; }
+div[data-baseweb="menu"] li, div[data-baseweb="menu"] [role="option"]{
+  background:#F7FBFF !important; color:#0B3C91 !important; font-weight:900 !important;
+  font-size:15px !important; padding:10px 12px !important; border-radius:8px !important;
 }
-div[data-baseweb="menu"] [role="option"]:hover{
-  background:#E8F2FF !important;
-  color:#0B0F19 !important;
+div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] [role="option"]:hover{
+  background:#E8F2FF !important; color:#0B3C91 !important;
 }
-div[data-baseweb="menu"] [aria-selected="true"]{
-  background:#DBEAFE !important;
-  color:#0B0F19 !important;
-  box-shadow: inset 4px 0 0 #3B82F6;
+div[data-baseweb="menu"] li[aria-selected="true"], div[data-baseweb="menu"] [role="option"][aria-selected="true"]{
+  background:#DBEAFE !important; color:#0B3C91 !important; box-shadow: inset 4px 0 0 #3B82F6;
 }
 
 /* Multiselect tags */
 .stMultiSelect [data-baseweb="tag"]{
-  background:#DBEAFE !important;
-  color:#0B3C91 !important;
-  border-radius:12px !important;
-  font-weight:900 !important;
+  background:#DBEAFE !important; color:#0B3C91 !important; border-radius:12px !important; font-weight:900 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -127,7 +106,7 @@ def gauge_svg(score_0_to_10: float) -> str:
     </svg>
     """
 
-# ----------------- LAYOUT -----------------
+# ----------------- COLUMNS -----------------
 col_left, col_mid, col_right = st.columns([1.1, 1.2, 1.2])
 
 # ================= LEFT COLUMN =================
@@ -136,9 +115,8 @@ with col_left:
     st.markdown('<div style="padding:6px 10px;"><span style="display:inline-block;padding:6px 12px;border-radius:999px;background:#EEF0F3;border:1px solid #D7DBE0;font-weight:800;font-size:12px;">Premature</span></div>', unsafe_allow_html=True)
     st.markdown('<div class="headerpink">Patient Info</div>', unsafe_allow_html=True)
 
-    # Sex selector (Girl/Boy) + highlighted icons
+    # --- Sex selector (Girl/Boy) + highlight icon ---
     sex = st.selectbox("Sex", ["Girl","Boy"], index=0, key="sex")
-    st.session_state["sex"] = sex
     sel_girl = " sel" if sex == "Girl" else ""
     sel_boy  = " sel" if sex == "Boy" else ""
 
@@ -150,7 +128,7 @@ with col_left:
     </div>
     """, unsafe_allow_html=True)
 
-    # Inputs card
+    # Inner white card with ONLY the inputs
     with st.container():
         st.markdown('<div class="card">', unsafe_allow_html=True)
 
@@ -159,7 +137,7 @@ with col_left:
         st.date_input("Date of Birth", value=dt.date(2025,4,21), key="dob")
         st.number_input("Age at Surgery (days)", min_value=0, value=7, step=1, key="age_days")
 
-        # (Mass/Mode section removed)
+        # --- REMOVED mass/mode mini-tiles section (per your request) ---
 
         # Shunt size scale (visual)
         st.markdown("""
@@ -236,7 +214,7 @@ with col_right:
     st.markdown('<div class="center" style="margin:8px 0;"><span class="addbtn">Additional Info</span></div>', unsafe_allow_html=True)
     syn = st.toggle("Syndrome Present", value=True)
 
-    # Fetal Drug Exposure -> Yes/No dropdown
+    # CHANGED: Fetal Drug Exposure -> Yes/No dropdown
     fd = st.selectbox("Fetal Drug Exposure", ["No","Yes"], index=0)
 
     ab = st.text_area("Abnormalities / Etc.", value="—", height=80)
