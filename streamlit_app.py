@@ -217,7 +217,7 @@ with col_left:
     with st.container():
         st.markdown('<div class="card">', unsafe_allow_html=True)
 
-        st.selectbox("Race", ["White","Black","Asian","Native American","Pacific Islander","Other"], index=0, key="race")
+        st.selectbox("Race", ["White","Black","Asian","American Indian","Asian","Native Hawaiian", "Other Pacific Islander"], index=0, key="race")
         st.selectbox("Ethnicity", ["German","Hispanic/Latino","Non-Hispanic","Other"], index=1, key="eth")
         st.date_input("Date of Birth", value=dt.date(2025,4,21), key="dob")
         st.number_input("Age at Surgery (days)", min_value=0, value=7, step=1, key="age_days")
