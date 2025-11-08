@@ -5,56 +5,105 @@ import math
 
 st.set_page_config(page_title="Pediatric Dashboard", layout="wide")
 
-# ----------------- GLOBAL CSS -----------------
-st.markdown("""
+# ----------------- THEME FUNCTION -----------------
+def get_theme_css(sex):
+    """Generate theme CSS based on gender selection"""
+    if sex == "Boy":
+        # Boy theme - Blue colors
+        theme = {
+            "bg": "#EFF4F8",
+            "panel": "#E8F1FA",
+            "border": "#B8D4E8",
+            "ink": "#1b1e28",
+            "pill": "#EAF3FF",
+            "pillborder": "#C7DBFF",
+            "hover": "#D6EBFF",
+            "selected": "#C7E3FF",
+            "card_shadow": "#d0e0f0",
+            "panel_border": "#A8C8E0",
+            "header_bg": "#A8C8E8",
+            "header_border": "#8BB5D8",
+            "iconbox1_border": "#7BB3D0",
+            "iconbox1_bg": "#C8E3F5",
+            "iconbox2_border": "#9DB8C8",
+            "iconbox2_bg": "#D0E8F5",
+            "iconbox3_border": "#6BA5C8",
+            "iconbox3_bg": "#B8DDF5",
+            "eventbox_shadow": "#d0e0f0"
+        }
+    else:
+        # Girl theme - Pink colors (default)
+        theme = {
+            "bg": "#F6EFEF",
+            "panel": "#FBECEC",
+            "border": "#E1C1C3",
+            "ink": "#1b1e28",
+            "pill": "#EAF3FF",
+            "pillborder": "#C7DBFF",
+            "hover": "#EEF4FF",
+            "selected": "#FFE7EC",
+            "card_shadow": "#f6d8da",
+            "panel_border": "#e8c7cf",
+            "header_bg": "#f7c8d8",
+            "header_border": "#eab2c6",
+            "iconbox1_border": "#E7B6C0",
+            "iconbox1_bg": "#FFD7E2",
+            "iconbox2_border": "#F0C994",
+            "iconbox2_bg": "#FFE8C6",
+            "iconbox3_border": "#B6D7FF",
+            "iconbox3_bg": "#D0E9FF",
+            "eventbox_shadow": "#f6d8da"
+        }
+    
+    return f"""
 <style>
 /* Remove Streamlit chrome + tighten spacing */
-header[data-testid="stHeader"]{display:none !important;}
-#MainMenu, footer{visibility:hidden !important;}
-.block-container{padding-top:6px !important; max-width:1320px;}
+header[data-testid="stHeader"]{{display:none !important;}}
+#MainMenu, footer{{visibility:hidden !important;}}
+.block-container{{padding-top:6px !important; max-width:1320px;}}
 
-/* Theme (high contrast) */
-:root{
-  --bg:#F6EFEF; --panel:#FBECEC; --border:#E1C1C3; --ink:#1b1e28;
-  --pill:#EAF3FF; --pillborder:#C7DBFF; --hover:#EEF4FF; --selected:#FFE7EC;
-}
-[data-testid="stAppViewContainer"]{background:var(--bg);}
-h1,h2,h3,h4,p,div,span{color:var(--ink);}
+/* Theme - {'Boy' if sex == 'Boy' else 'Girl'} */
+:root{{
+  --bg:{theme['bg']}; --panel:{theme['panel']}; --border:{theme['border']}; --ink:{theme['ink']};
+  --pill:{theme['pill']}; --pillborder:{theme['pillborder']}; --hover:{theme['hover']}; --selected:{theme['selected']};
+}}
+[data-testid="stAppViewContainer"]{{background:var(--bg);}}
+h1,h2,h3,h4,p,div,span{{color:var(--ink);}}
 
 /* Cards & layout bits */
-.card{background:#fff;border:2px solid var(--border);border-radius:16px;padding:12px 14px;box-shadow:0 2px 0 #f6d8da inset;margin-bottom:12px;}
-.pinkpanel{background:var(--panel);border:2px solid #e8c7cf;border-radius:10px;overflow:hidden;}
-.headerpink{background:#f7c8d8;border-bottom:2px solid #eab2c6;padding:10px 14px;font-weight:900;text-align:center;}
-.pill-blue{display:inline-block;padding:6px 14px;border-radius:999px;background:#d6e7ff;border:1px solid #bcd6ff;font-weight:900;}
-.iconrow{display:flex;gap:14px;justify-content:center;padding:12px 0 6px;}
-.iconbox, .iconbox2, .iconbox3{
+.card{{background:#fff;border:2px solid var(--border);border-radius:16px;padding:12px 14px;box-shadow:0 2px 0 {theme['card_shadow']} inset;margin-bottom:12px;}}
+.pinkpanel{{background:var(--panel);border:2px solid {theme['panel_border']};border-radius:10px;overflow:hidden;}}
+.headerpink{{background:{theme['header_bg']};border-bottom:2px solid {theme['header_border']};padding:10px 14px;font-weight:900;text-align:center;}}
+.pill-blue{{display:inline-block;padding:6px 14px;border-radius:999px;background:#d6e7ff;border:1px solid #bcd6ff;font-weight:900;}}
+.iconrow{{display:flex;gap:14px;justify-content:center;padding:12px 0 6px;}}
+.iconbox, .iconbox2, .iconbox3{{
   width:70px;height:70px;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:36px;
-}
-.iconbox{border:2px solid #E7B6C0;background:#FFD7E2;}
-.iconbox2{border:2px solid #F0C994;background:#FFE8C6;}
-.iconbox3{border:2px solid #B6D7FF;background:#D0E9FF;}
-.sel{ outline:3px solid #3B82F6; box-shadow:0 0 0 2px #93C5FD inset; }
+}}
+.iconbox{{border:2px solid {theme['iconbox1_border']};background:{theme['iconbox1_bg']};}}
+.iconbox2{{border:2px solid {theme['iconbox2_border']};background:{theme['iconbox2_bg']};}}
+.iconbox3{{border:2px solid {theme['iconbox3_border']};background:{theme['iconbox3_bg']};}}
+.sel{{ outline:3px solid #3B82F6; box-shadow:0 0 0 2px #93C5FD inset; }}
 
-.right{text-align:right;} .center{text-align:center;} .red{color:#C6002A;font-weight:900;}
+.right{{text-align:right;}} .center{{text-align:center;}} .red{{color:#C6002A;font-weight:900;}}
 
 /* Timeline */
-.timelinewrap{padding:12px;}
-.vert{position:relative;height:520px;margin:0 24px;}
-.vert:before{content:"";position:absolute;left:50%;top:18px;bottom:18px;width:2px;background:#111;transform:translateX(-50%);}
-.vert:after{content:"";position:absolute;left:40px;right:40px;top:6px;height:2px;background:#111;}
-.hbot{position:absolute;left:40px;right:40px;bottom:6px;height:2px;background:#111;}
-.tick{position:absolute;left:50%;transform:translateX(-50%);}
-.tick .dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;background:#111;border-radius:50%;}
-.tick .lbl{position:absolute;left:20px;top:-10px;width:230px;font-weight:700;}
+.timelinewrap{{padding:12px;}}
+.vert{{position:relative;height:520px;margin:0 24px;}}
+.vert:before{{content:"";position:absolute;left:50%;top:18px;bottom:18px;width:2px;background:#111;transform:translateX(-50%);}}
+.vert:after{{content:"";position:absolute;left:40px;right:40px;top:6px;height:2px;background:#111;}}
+.hbot{{position:absolute;left:40px;right:40px;bottom:6px;height:2px;background:#111;}}
+.tick{{position:absolute;left:50%;transform:translateX(-50%);}}
+.tick .dot{{position:absolute;left:-4px;top:-4px;width:8px;height:8px;background:#111;border-radius:50%;}}
+.tick .lbl{{position:absolute;left:20px;top:-10px;width:230px;font-weight:700;}}
 
 /* Event-look boxes */
-.eventbox{border:2px solid var(--border);border-radius:16px;padding:12px;background:#fff;box-shadow:0 2px 0 #f6d8da inset;}
-.eventtitle{font-weight:900;margin:10px 0 6px;}
-.addbtn{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 #f6d8da inset;}
+.eventbox{{border:2px solid var(--border);border-radius:16px;padding:12px;background:#fff;box-shadow:0 2px 0 {theme['eventbox_shadow']} inset;}}
+.eventtitle{{font-weight:900;margin:10px 0 6px;}}
+.addbtn{{display:inline-block;background:#fff;border:2px solid var(--border);border-radius:999px;padding:8px 20px;font-weight:900;box-shadow:0 2px 0 {theme['eventbox_shadow']} inset;}}
 
 /* ===== DROPDOWN STYLES - HIGH CONTRAST WHITE BACKGROUND ===== */
 .stSelectbox div[data-baseweb="select"] > div,
-.stMultiSelect div[data-baseweb="select"] > div{
+.stMultiSelect div[data-baseweb="select"] > div{{
   background:#FFFFFF !important; 
   background-color:#FFFFFF !important; 
   color:#1B1E28 !important; 
@@ -62,48 +111,48 @@ h1,h2,h3,h4,p,div,span{color:var(--ink);}
   min-height:44px; 
   font-weight:800; 
   border-width:2px !important;
-}
-.stSelectbox svg, .stMultiSelect svg{ 
+}}
+.stSelectbox svg, .stMultiSelect svg{{ 
   fill:#1B1E28 !important; 
   color:#1B1E28 !important; 
-}
-div[data-baseweb="select"] input{ 
+}}
+div[data-baseweb="select"] input{{ 
   color:#1B1E28 !important; 
   font-weight:800; 
   background:#FFFFFF !important;
   background-color:#FFFFFF !important;
-}
-div[data-baseweb="select"] input::placeholder{ 
+}}
+div[data-baseweb="select"] input::placeholder{{ 
   color:#8A8A8A !important; 
-}
+}}
 
 /* Dropdown menu popover - FORCE WHITE BACKGROUND */
-div[data-baseweb="popover"]{ 
+div[data-baseweb="popover"]{{ 
   z-index: 9999 !important; 
   background:#FFFFFF !important;
   background-color:#FFFFFF !important;
-}
-div[data-baseweb="popover"] > div{
+}}
+div[data-baseweb="popover"] > div{{
   background:#FFFFFF !important;
   background-color:#FFFFFF !important;
-}
-div[data-baseweb="menu"]{
+}}
+div[data-baseweb="menu"]{{
   background:#FFFFFF !important; 
   background-color:#FFFFFF !important;
   color:#1B1E28 !important; 
   border:2px solid #C4C4C4 !important;
   border-radius:12px !important; 
   box-shadow:0 12px 30px rgba(0,0,0,0.25) !important;
-}
-div[data-baseweb="menu"] ul{ 
+}}
+div[data-baseweb="menu"] ul{{ 
   background:#FFFFFF !important; 
   background-color:#FFFFFF !important;
   padding:6px !important; 
-}
+}}
 div[data-baseweb="menu"] li, 
 div[data-baseweb="menu"] [role="option"],
 div[data-baseweb="menu"] > ul > li,
-div[data-baseweb="menu"] ul li{
+div[data-baseweb="menu"] ul li{{
   background:#FFFFFF !important; 
   background-color:#FFFFFF !important;
   color:#1B1E28 !important; 
@@ -111,24 +160,24 @@ div[data-baseweb="menu"] ul li{
   font-size:15px !important; 
   padding:10px 12px !important; 
   border-radius:8px !important;
-}
+}}
 div[data-baseweb="menu"] li:hover, 
 div[data-baseweb="menu"] [role="option"]:hover,
 div[data-baseweb="menu"] > ul > li:hover,
-div[data-baseweb="menu"] ul li:hover{
+div[data-baseweb="menu"] ul li:hover{{
   background:#E8E8E8 !important; 
   background-color:#E8E8E8 !important;
   color:#1B1E28 !important;
-}
+}}
 div[data-baseweb="menu"] li[aria-selected="true"], 
 div[data-baseweb="menu"] [role="option"][aria-selected="true"],
 div[data-baseweb="menu"] > ul > li[aria-selected="true"],
-div[data-baseweb="menu"] ul li[aria-selected="true"]{
+div[data-baseweb="menu"] ul li[aria-selected="true"]{{
   background:#3B82F6 !important; 
   background-color:#3B82F6 !important;
   color:#FFFFFF !important; 
   box-shadow: inset 4px 0 0 #1E40AF;
-}
+}}
 
 /* Force text color in dropdown options - override ALL nested elements */
 div[data-baseweb="menu"] li *,
@@ -137,40 +186,47 @@ div[data-baseweb="menu"] span,
 div[data-baseweb="menu"] div,
 div[data-baseweb="menu"] p,
 div[data-baseweb="menu"] li span,
-div[data-baseweb="menu"] li div{
+div[data-baseweb="menu"] li div{{
   color:#1B1E28 !important;
-}
+}}
 
 /* Override any dark theme styles on popover children - but preserve hover/selected */
-div[data-baseweb="popover"] > div{
+div[data-baseweb="popover"] > div{{
   background-color:#FFFFFF !important;
-}
-div[data-baseweb="popover"] ul{
+}}
+div[data-baseweb="popover"] ul{{
   background-color:#FFFFFF !important;
-}
-div[data-baseweb="popover"] li:not(:hover):not([aria-selected="true"]){
+}}
+div[data-baseweb="popover"] li:not(:hover):not([aria-selected="true"]){{
   background-color:#FFFFFF !important;
   color:#1B1E28 !important;
-}
+}}
 
 /* Target BaseWeb select dropdown specifically */
 [data-baseweb="select"] [role="listbox"],
-[data-baseweb="select"] [role="option"]{
+[data-baseweb="select"] [role="option"]{{
   background:#FFFFFF !important;
   background-color:#FFFFFF !important;
   color:#1B1E28 !important;
-}
+}}
 
 /* Multiselect tags */
-.stMultiSelect [data-baseweb="tag"]{
+.stMultiSelect [data-baseweb="tag"]{{
   background:#3B82F6 !important; 
   background-color:#3B82F6 !important;
   color:#FFFFFF !important; 
   border-radius:12px !important; 
   font-weight:900 !important;
-}
+}}
 </style>
-""", unsafe_allow_html=True)
+"""
+
+# ----------------- INITIALIZE SEX SELECTION -----------------
+# Get current sex from session state, default to "Girl"
+current_sex = st.session_state.get("sex", "Girl")
+
+# ----------------- APPLY THEME CSS -----------------
+st.markdown(get_theme_css(current_sex), unsafe_allow_html=True)
 
 # ----------------- TITLE -----------------
 st.subheader("Pediatric Dashboard")
@@ -201,7 +257,10 @@ with col_left:
     st.markdown('<div class="headerpink">Patient Info</div>', unsafe_allow_html=True)
 
     # --- Sex selector (Girl/Boy) + highlight icon ---
-    sex = st.selectbox("Sex", ["Girl","Boy"], index=0, key="sex")
+    # Sex selector - session state will track the selection automatically
+    sex = st.selectbox("Sex", ["Girl","Boy"], key="sex")
+    # Update current_sex to match the selected value
+    current_sex = sex
     sel_girl = " sel" if sex == "Girl" else ""
     sel_boy  = " sel" if sex == "Boy" else ""
 
